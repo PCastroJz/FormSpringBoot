@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+    <h3 th:text="${title}"></h3>
+    <form th:action="@{/form}" th:object="${usuario}" method="post">
+        <div>
+            <label for="habilitar">Habilitar</label>
+            <div>
+                <input type="checkbox" th:field="*{habilitar}" id="habilitar">
+            </div>
+        </div>
+        <div>
+            <label for="nombre">Nombre</label>
+            <div>
+                <input type="text" th:field="*{nombre}" id="nombre">
+            </div>
+            <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+        </div>
+        <div>
+            <label for="apellido">Apellido</label>
+            <div>
+                <input type="text" th:field="*{apellido}" id="apellido">
+            </div>
+            <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+        </div>
+        <div>
+            <label for="pais">Pais</label>
+            <div>
+                <select th:field="*{pais}" id="pais">
+                    <option value="">--Selecciona--</option>
+                    <option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
+                </select>
+            </div>
+            <div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+        </div>
+        <div>
+            <label>Genero</label>
+            <div th:each="gen: ${genero}">
+                <input type="radio" th:field="*{genero}" th:value="${gen}">
+                <label th:for="${#ids.prev('genero')}" th:text="${gen}"></label>
+            </div>
+            <div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+        </div>
+        <div>
+            <label for="id">Id</label>
+            <div>
+                <input type="text" th:field="*{id}" id="id">
+            </div>
+            <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+        </div>
+        <div>
+            <label for="username">Username</label>
+            <div>
+                <input type="text" th:field="*{username}" id="username">
+            </div>
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        </div>
+        <div>
+            <label for="password">Contraseña</label>
+            <div>
+                <input type="password" th:field="*{password}" id="password">
+            </div>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        </div>
+        <div>
+            <label for="email">Correo</label>
+            <div>
+                <input type="text" th:field="*{email}" id="email">
+            </div>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+        <div>
+            <label>Roles</label>
+            <div th:each="role: ${listaRoles}">
+                <input type="checkbox" th:field="*{roles}" th:value="${role.id}">
+                <label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
+            </div>
+            <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+        </div>
+        <div>
+            <label for="cuenta">Cuenta</label>
+            <div>
+                <input type="number" th:field="*{cuenta}" id="cuenta">
+            </div>
+            <div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+        </div>
+        <div>
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <div>
+                <input type="date" th:field="*{fechaNacimiento}" id="fechaNacimiento">
+            </div>
+            <div th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+        </div>
+        <div>
+            <div><input type="submit" value="Enviar"></div>
+        </div>
+    </form>
+</body>
+
+</html>
