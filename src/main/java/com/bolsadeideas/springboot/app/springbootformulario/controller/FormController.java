@@ -26,6 +26,9 @@ import com.bolsadeideas.springboot.app.springbootformulario.services.RolService;
 import com.bolsadeideas.springboot.app.springbootformulario.validacion.UsuarioValidator;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
 
 @Controller
 @SessionAttributes("usuario")
@@ -84,18 +87,27 @@ public class FormController {
     }
 
     @PostMapping("/form")
-    public String resultado(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+    public String resultado(@Valid Usuario usuario, BindingResult result, Model model) {
         // validator.validate(usuario, result);
         if (result.hasErrors()) {
-            model.addAttribute("title", "Revisar Formulario");
+            model.addAttribute("title", "Nuevo formulario");
             return "form";
         }
 
+        return "redirect:/ver";
+    }
+
+    @GetMapping("/ver")
+    public String ver(@SessionAttribute(name="usuario", required = false) Usuario usuario, Model model, SessionStatus status) {
+
+        if(usuario==null){
+            return "redirect:/form";
+        }
         model.addAttribute("title", "Resultado Formulario");
-        model.addAttribute("usuario", usuario);
 
         status.setComplete();
         return "resultado";
     }
+    
 
 }
