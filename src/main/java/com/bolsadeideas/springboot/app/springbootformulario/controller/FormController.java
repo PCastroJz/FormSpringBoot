@@ -81,7 +81,7 @@ public class FormController {
         usuario.setHabilitar(true);
         usuario.setPais(new Pais(1, "MX", "Mexico"));
         usuario.setRoles(Arrays.asList(new Rol(3, "", "")));
-        model.addAttribute("title", "Nuevo formulario");
+        model.addAttribute("title", "FORMULARIO");
         model.addAttribute("usuario", usuario);
         return "form";
     }
