@@ -1,0 +1,23 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url(/imgs/fondo-cuadricula-digital-abstracto-negro.jpg);
+}
+
+.contenedor-1 {
+    padding: 10px;
+    box-shadow: 5px 5px 5px 5px rgba(104, 104, 104, 0.356);
+    border-radius: 3px;
+}
+
+.formulario-1 {
+    border: 3px;
+}
