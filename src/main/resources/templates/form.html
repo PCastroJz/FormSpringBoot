@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}"></title>
     <link href="/css/Style.css" rel="stylesheet" type="text/css">
-    <link href="/css/Animated.css" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad&display=swap" rel="stylesheet">
@@ -15,63 +14,63 @@
 <body>
     <h3 class="titulo-form" th:text="${title}"></h3>
     <form class="formulario-1" th:action="@{/form}" th:object="${usuario}" method="post">
-        <div class="contenedor-pasos" id="paso1">
+        <!-- <div class="contenedor-pasos" id="paso1">
             <div class="seccion">Datos de Registro</div>
             <div class="datos">
                 <div class="input-text">
-                    <input type="text" th:field="*{id}" id="id">
+                    <input class="input-val" type="text" th:field="*{id}" id="id">
                     <span>Id</span>
                 </div>
-                <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+                <div class="error-div" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
                 <div class="input-text">
-                    <input type="text" th:field="*{email}" id="email">
+                    <input class="input-val" type="text" th:field="*{email}" id="email">
                     <span>Correo</span>
                 </div>
-                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <div class="error-div" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 <div class="input-text">
-                    <input type="password" th:field="*{password}" id="password">
+                    <input class="input-val" type="password" th:field="*{password}" id="password">
                     <span>Contraseña</span>
                 </div>
-                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <div class="error-div" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             </div>
             <div>
-                <div><button>Siguiente</button></div>
+                <div><button class="boton-sig">Siguiente</button></div>
             </div>
-        </div>
-        <!-- <div class="contenedor-pasos" id="paso2">
+        </div> -->
+        <div class="contenedor-pasos" id="paso2">
             <div class="seccion">Datos de la Cuenta</div>
             <div class="datos">
-                    <label for="username">Username</label>
-                    <div>
-                        <input type="text" th:field="*{username}" id="username">
-                    </div>
-                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-                    <label for="cuenta">Cuenta</label>
-                    <div>
-                        <input type="number" th:field="*{cuenta}" id="cuenta">
-                    </div>
-                <div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+                <div class="input-text">
+                    <input class="input-val" type="text" th:field="*{username}" id="username">
+                    <span>Username</span>
+                </div>
+                <div class="error-div" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                <div class="input-text">
+                    <input class="input-val" type="text" th:field="*{cuenta}" id="cuenta">
+                    <span>Cuenta</span>
+                </div>
+                <div class="error-div" th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+                <span style="margin-top: 15px;">Roles</span>
                 <div class="input-check">
-                    <label>Roles</label>
-                    <div th:each="role: ${listaRoles}">
-                        <input type="checkbox" th:field="*{roles}" th:value="${role.id}">
+                    <label class="check-div" th:each="role: ${listaRoles}">
+                        <span></span>
+                        <input class="check-val" type="checkbox" th:field="*{roles}" th:value="${role.id}">
                         <label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
-                    </div>
+                    </label>
                     <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
                 </div>
-                <div class="input-check">
-                    <label for="habilitar">Habilitar</label>
-                    <div>
-                        <input type="checkbox" th:field="*{habilitar}" id="habilitar">
-                    </div>
-                </div>
+                <label style="margin-top: 15px;" for="habilitar">Cuenta Activa</label>
+                <label class="switch">
+                    <input th:field="*{habilitar}" th:value="${null}" class="prueba" type="checkbox">
+                    <span class="slider"></span>
+                </label>
             </div>
-            <div>
-                <div><button>Siguiente</button></div>
-                <div><button>Regresar</button></div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div><button class="boton-sig">Regresar</button></div>
+                <div><button class="boton-sig">Siguiente</button></div>
             </div>
         </div>
-        <div class="contenedor-pasos" id="paso3">
+        <!-- <div class="contenedor-pasos" id="paso3">
             <div class="seccion">Datos Personales</div>
             <div class="datos">
                 <div class="input-text">
@@ -122,6 +121,7 @@
         </div> -->
     </form>
 </body>
+<script src="/js/input.js"></script>
 <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>

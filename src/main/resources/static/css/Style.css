@@ -52,8 +52,7 @@ body {
 .formulario-1 {
     width: 100%;
     max-width: 400px;
-    height: 100%;
-    max-height: 200px;
+    height: auto;
 }
 
 .contenedor-pasos {
@@ -67,32 +66,165 @@ body {
     font-size: 22px;
 }
 
-.datos{
+.datos {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.input-text{
+.input-text {
     width: 300px;
     display: flex;
     justify-content: left;
     align-items: center;
     position: relative;
+    margin-top: 15px;
 }
 
-.input-text>input{
+.input-text input {
     width: 100%;
-    padding: 10px 5px;
+    background-color: transparent;
+    padding: 10px 20px;
     border: none;
     outline: none;
     border-radius: 20px;
-    border: solid 1px #999;
-    text-align: center;
+    border-bottom: solid 1px #999;
+    font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
+    transition: all 0.2s ease;
 }
 
-.input-text>span{
+.input-text>span {
     position: absolute;
     padding-left: 20px;
+    transition: all 0.3s ease;
+}
+
+
+.input-text>input~.active {
+    transform: translateY(-17px);
+    font-size: 12px;
+    background-color: transparent;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+.input-text>input~.val {
+    color: #00eeff !important;
+}
+
+.inp-active {
+    border-bottom: solid 1px #00eeff !important;
+    transition: all 0.2s ease;
+}
+
+.boton-sig {
+    width: 150px;
+    height: 40px;
+    margin: 10px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border: solid 1px #999;
+    border-radius: 20px;
+
+    font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.boton-sig:hover {
+    border: solid 3px #00eeff;
+    color: #00eeff;
+    transition: all 0.1s ease;
+    font-weight: 600;
+}
+
+.error-div {
+    font-size: 12px;
+    color: #ffa42d;
+}
+
+.check-div {
+    border: solid 1px #999;
+    width: 120px;
+    height: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.check-div:hover {
+    border: solid 2px #00eeff;
+    width: 118px;
+    height: 28px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.check-active {
+    border: solid 2px #00eeff;
+    width: 118px;
+    height: 28px;
+    transition: all 0.1s ease;
+}
+
+.check-val {
+    display: none;
+}
+
+.check-div>label {
+    margin: auto;
+}
+
+.check-div>label:hover {
+    cursor: pointer;
+}
+
+.lab-check-active {
+    color: #00eeff;
+    font-weight: 600;
+}
+
+.input-check {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    width: 100%;
+}
+
+.switch {
+    padding: 2px;
+    width: 44px;
+    border-bottom: solid 1px #999;
+    border-radius: 20px;
+    display: block;
+    transition: all 0.2s ease;
+    
+}
+
+.switch-act{
+    background-color: #00eeff;
+    transition: all 0.2s ease;
+}
+
+.prueba {
+    display: none;
+}
+
+.slider {
+    height: 20px;
+    display: block;
+    width: 20px;
+    border-radius: 50%;
+    border-top: solid 1px #999;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.slider-act {
+    transform: translateX(22px);
+    transition: all 0.2s ease;
 }
