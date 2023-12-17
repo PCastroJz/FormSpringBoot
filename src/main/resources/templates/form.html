@@ -13,8 +13,14 @@
 
 <body>
     <h3 class="titulo-form" th:text="${title}"></h3>
+    <h5 class="error-form" th:text="${error}"></h5>
+    <div class="progresbar">
+        <span id="paso1a" class="progresbar-option act-pb">Datos de Registro</span>
+        <span id="paso2a" class="progresbar-option">Datos de la Cuenta</span>
+        <span id="paso3a" class="progresbar-option">Datos Personales</span>
+    </div>
     <form class="formulario-1" th:action="@{/form}" th:object="${usuario}" method="post">
-        <!-- <div class="contenedor-pasos" id="paso1">
+        <div class="contenedor-pasos step-active" id="paso1">
             <div class="seccion">Datos de Registro</div>
             <div class="datos">
                 <div class="input-text">
@@ -34,9 +40,9 @@
                 <div class="error-div" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             </div>
             <div>
-                <div><button class="boton-sig">Siguiente</button></div>
+                <div><button type="button" class="boton-sig" onclick="nextStep1a2()">Siguiente</button></div>
             </div>
-        </div> -->
+        </div>
         <div class="contenedor-pasos" id="paso2">
             <div class="seccion">Datos de la Cuenta</div>
             <div class="datos">
@@ -52,12 +58,13 @@
                 <div class="error-div" th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
                 <span style="margin-top: 15px;">Roles</span>
                 <div class="input-check">
-                    <label class="check-div" th:each="role: ${listaRoles}">
-                        <span></span>
-                        <input class="check-val" type="checkbox" th:field="*{roles}" th:value="${role.id}">
-                        <label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
-                    </label>
-                    <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+                    <div style="display: flex; justify-content: space-around;">
+                        <label class="check-div" th:each="role: ${listaRoles}">
+                            <input class="check-val" type="checkbox" th:field="*{roles}" th:value="${role.id}">
+                            <label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
+                        </label>
+                    </div>
+                    <div class="error-div" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
                 </div>
                 <label style="margin-top: 15px;" for="habilitar">Cuenta Activa</label>
                 <label class="switch">
@@ -66,59 +73,57 @@
                 </label>
             </div>
             <div style="display: flex; justify-content: center; align-items: center;">
-                <div><button class="boton-sig">Regresar</button></div>
-                <div><button class="boton-sig">Siguiente</button></div>
+                <div><button type="button" class="boton-sig" onclick="prevStep2a1()">Regresar</button></div>
+                <div><button type="button" class="boton-sig" onclick="prevStep2a3()">Siguiente</button></div>
             </div>
         </div>
-        <!-- <div class="contenedor-pasos" id="paso3">
+        <div class="contenedor-pasos" id="paso3">
             <div class="seccion">Datos Personales</div>
             <div class="datos">
                 <div class="input-text">
-                    <label for="nombre">Nombre</label>
-                    <div>
-                        <input type="text" th:field="*{nombre}" id="nombre">
-                    </div>
-                    <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                    <input class="input-val" type="text" th:field="*{nombre}" id="nombre">
+                    <span>Nombre</span>
                 </div>
+                <div class="error-div" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                 <div class="input-text">
-                    <label for="apellido">Apellido</label>
-                    <div>
-                        <input type="text" th:field="*{apellido}" id="apellido">
-                    </div>
-                    <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+                    <input class="input-val" type="text" th:field="*{apellido}" id="apellido">
+                    <span>Apellido</span>
                 </div>
+                <div class="error-div" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+                <span style="margin-top: 15px;">Genero</span>
                 <div class="input-radio">
-                    <label>Genero</label>
-                    <div th:each="gen: ${genero}">
-                        <input type="radio" th:field="*{genero}" th:value="${gen}">
+                    <label class="radio-div" th:each="gen: ${genero}">
+                        <input class="radio-val" type="radio" th:field="*{genero}" th:value="${gen}">
                         <label th:for="${#ids.prev('genero')}" th:text="${gen}"></label>
-                    </div>
-                    <div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+                    </label>
                 </div>
-                <div class="input-date">
-                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                    <div>
-                        <input type="date" th:field="*{fechaNacimiento}" id="fechaNacimiento">
-                    </div>
-                    <div th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+                <div class="error-div" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+                <span style="margin-top: 15px;">Fecha de Nacimiento</span>
+                <div class="input-text">
+                    <input class="date-val" type="date" th:field="*{fechaNacimiento}" id="fechaNacimiento">
                 </div>
-                <div class="input-select">
-                    <label for="pais">Pais</label>
-                    <div>
-                        <select th:field="*{pais}" id="pais">
-                            <option value="">--Selecciona--</option>
-                            <option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}">
-                            </option>
-                        </select>
-                    </div>
-                    <div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+                <div class="error-div" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+                <span style="margin-top: 15px;">Pais</span>
+                <div class="input-text">
+                    <select th:field="*{pais}" id="pais">
+                        <option value="">--Selecciona--</option>
+                        <option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}">
+                        </option>
+                    </select>
+                    <span class="select1"><svg class="select" xmlns="http://www.w3.org/2000/svg" id="Outline"
+                            viewBox="0 0 24 24" width="512" height="512">
+                            <path
+                                d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z" />
+                        </svg>
+                    </span>
                 </div>
+                <div class="error-div" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div><button type="button" class="boton-sig" onclick="prevStep3a2()">Regresar</button></div>
+                <div><input class="boton-final" type="submit" value="Enviar"></div>
             </div>
         </div>
-        <div>
-            <div><input type="submit" value="Enviar"></div>
-            <div><button>Regresar</button></div>
-        </div> -->
     </form>
 </body>
 <script src="/js/input.js"></script>

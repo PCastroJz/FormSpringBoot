@@ -46,20 +46,99 @@ body {
 }
 
 .titulo-form {
+    position: absolute;
+    width: 100%;
+    top: 0%;
+    z-index: 2;
+    /* Un valor más alto para que esté por encima de los contenedores */
     font-size: 35px;
 }
 
-.formulario-1 {
+.error-form {
+    position: absolute;
     width: 100%;
-    max-width: 400px;
+    top: 6%;
+    z-index: 2;
+    color: #ffa42d;
+    /* Un valor más alto para que esté por encima de los contenedores */
+}
+
+
+.progresbar {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: 11%;
+    z-index: 2;
+    counter-reset: step;
+    /* Un valor más alto para que esté por encima de los contenedores */
+}
+
+.progresbar-option {
+    width: 100%;
+    position: relative;
+}
+
+.progresbar-option:before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid 1px #999;
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: transparent;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.act-pb:before, .act-pb:after{
+    border-bottom: solid 2px #00eeff;
+}
+
+.progresbar-option:after {
+    display: block;
+    content: "";
+    width: 87%;
+    height: 1px;
+    background-color: #999;
+    position: absolute;
+    top: 10px;
+    left: -43%;
+    z-index: 1;
+}
+.progresbar-option:nth-child(1):after {
+    content: none;
+}
+
+.formulario-1 {
+    display: flex;
+    width: auto;
     height: auto;
 }
 
 .contenedor-pasos {
-    width: 100%;
-    max-width: 400px;
-    height: 100%;
-    max-height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    /* Ancho deseado del contenedor */
+    /* Agrega más estilos según sea necesario */
+}
+
+.step-active {
+    opacity: 1;
+    z-index: 2;
+    pointer-events: all;
+    transition: all 1s ease;
 }
 
 .seccion {
@@ -94,6 +173,35 @@ body {
     transition: all 0.2s ease;
 }
 
+.input-text select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 100%;
+    background-color: transparent;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    border-bottom: solid 1px #999;
+    font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
+    transition: all 0.2s ease;
+}
+
+.select1 {
+    position: absolute;
+    right: 10px;
+}
+
+.select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+}
+
 .input-text>span {
     position: absolute;
     padding-left: 20px;
@@ -115,6 +223,12 @@ body {
 
 .inp-active {
     border-bottom: solid 1px #00eeff !important;
+    transition: all 0.2s ease;
+}
+
+.date-active {
+    border-bottom: solid 1px #00eeff !important;
+    color: #00eeff;
     transition: all 0.2s ease;
 }
 
@@ -140,6 +254,26 @@ body {
     font-weight: 600;
 }
 
+.boton-final {
+    width: 150px;
+    height: 40px;
+    margin: 10px;
+    background-color: #00eeff;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font: 600 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.boton-final:hover {
+    transition: all 0.1s ease;
+    font-weight: 1000;
+    transform: scale(1.04);
+}
+
 .error-div {
     font-size: 12px;
     color: #ffa42d;
@@ -157,17 +291,13 @@ body {
 }
 
 .check-div:hover {
-    border: solid 2px #00eeff;
-    width: 118px;
-    height: 28px;
+    border: solid 1px #00eeff;
     transition: all 0.1s ease;
     cursor: pointer;
 }
 
 .check-active {
-    border: solid 2px #00eeff;
-    width: 118px;
-    height: 28px;
+    border: solid 1px #00eeff;
     transition: all 0.1s ease;
 }
 
@@ -185,11 +315,11 @@ body {
 
 .lab-check-active {
     color: #00eeff;
-    font-weight: 600;
 }
 
 .input-check {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     position: relative;
     width: 100%;
@@ -202,12 +332,12 @@ body {
     border-radius: 20px;
     display: block;
     transition: all 0.2s ease;
-    
+    cursor: pointer;
 }
 
-.switch-act{
-    background-color: #00eeff;
+.switch-act {
     transition: all 0.2s ease;
+    border-bottom: solid 1px #00eeff;
 }
 
 .prueba {
@@ -219,12 +349,63 @@ body {
     display: block;
     width: 20px;
     border-radius: 50%;
-    border-top: solid 1px #999;
-    background-color: white;
+    border: solid 1px #999;
+    background-color: rgb(255, 255, 255);
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .slider-act {
     transform: translateX(22px);
     transition: all 0.2s ease;
+    cursor: pointer;
+    border: solid 1px #00eeff;
+}
+
+.radio-div {
+    border: solid 1px #999;
+    width: 120px;
+    height: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.radio-div:hover {
+    border: solid 1px #00eeff;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.radio-active {
+    border: solid 1px #00eeff;
+    transition: all 0.1s ease;
+}
+
+.radio-val {
+    display: none;
+}
+
+.radio-div>label {
+    margin: auto;
+}
+
+.radio-div>label:hover {
+    cursor: pointer;
+}
+
+.lab-radio-active {
+    color: #00eeff;
+    font-weight: 600;
+}
+
+.input-radio {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-around;
+    place-items: center;
+    position: relative;
+    width: 100%;
 }

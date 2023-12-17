@@ -90,7 +90,8 @@ public class FormController {
     public String resultado(@Valid Usuario usuario, BindingResult result, Model model) {
         // validator.validate(usuario, result);
         if (result.hasErrors()) {
-            model.addAttribute("title", "Nuevo formulario");
+            model.addAttribute("title", "FORMULARIO");
+            model.addAttribute("error", "Valide los campos faltantes");
             return "form";
         }
 
