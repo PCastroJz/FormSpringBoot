@@ -4,33 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/Resultado.css" rel="stylesheet" type="text/css">
     <title th:text="${title}"></title>
 </head>
 
 <body>
-    <h3 th:text="${title}"></h3>
-    <ul>
-        <li th:text="${usuario.pais.id}"></li>
-        <li th:text="${usuario.pais.codigo}"></li>
-        <li th:text="${usuario.pais.nombre}"></li>
-        <li th:text="${usuario.id}"></li>
-        <li th:text="${usuario.nombre}"></li>
-        <li th:text="${usuario.apellido}"></li>
-        <li th:text="${#dates.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></li>
-        <li th:text="${usuario.username}"></li>
-        <li th:text="${usuario.password}"></li>
-        <li th:text="${usuario.email}"></li>
-        <li th:text="${usuario.cuenta}"></li>
-        <li th:text="'Habilitado: '+${usuario.habilitar}"></li>
-        <li th:text="'Genero: '+${usuario.genero}"></li>
-    </ul>
-
-    <div>
-        Roles
+    <div class="encabezado">
+        <h1>Resultado de Formulario</h1>
     </div>
-    <ul>
-        <li th:each="role: ${usuario.roles}" th:text="${role.nombre} + ': ' + ${role.id} + ': ' + ${role.role}"></li>
-    </ul>
+
+    <div class="usuario">
+        <h1 th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></h1>
+        <h3 th:text="${usuario.username}">ElCostraJc</h3>
+        <div class="contenedor">
+            <div>
+                <span style="color: black;">Genero</span>
+                <span th:text="${usuario.genero}"></span>
+            </div>
+            <div>
+                <span style="color: black;">Fecha de Nacimiento</span>
+                <span th:text="${#dates.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></span>
+            </div>
+            <div>
+                <span style="color: black;">Pais</span>
+                <span th:text="${usuario.pais.nombre}">Mexico</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor">
+        <span>Datos de registro</span>
+        <div>
+            <span style="color: black;">Id</span>
+            <div th:text="${usuario.id}"></div>
+        </div>
+        <div>
+            <span style="color: black;">Correo</span>
+            <div th:text="${usuario.email}"></div>
+        </div>
+        <div>
+            <span style="color: black;">Contraseña</span>
+            <div th:text="${usuario.password}"></div>
+        </div>
+    </div>
+
+    <div class="contenedor">
+        <span>Datos de la cuenta</span>
+        <div>
+            <span style="color: black;">Cuenta</span>
+            <div th:text="${usuario.cuenta}"></div>
+        </div>
+        <div>
+            <span style="color: black;">Roles</span>
+            <div th:each="role: ${usuario.roles}" th:text="${role.nombre}"></div>
+        </div>
+        <div>
+            <span style="color: black;">Habilitada</span>
+            <div th:text="${usuario.habilitar}"></div>
+        </div>
+    </div>
 </body>
+
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
 
 </html>

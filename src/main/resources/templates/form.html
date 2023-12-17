@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}"></title>
-    <link href="/css/Style.css" rel="stylesheet" type="text/css">
+    <link href="/css/Form.css" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad&display=swap" rel="stylesheet">
@@ -102,7 +102,8 @@
                 <div class="input-text">
                     <input class="date-val" type="date" th:field="*{fechaNacimiento}" id="fechaNacimiento">
                 </div>
-                <div class="error-div" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+                <div class="error-div" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}">
+                </div>
                 <span style="margin-top: 15px;">Pais</span>
                 <div class="input-text">
                     <select th:field="*{pais}" id="pais">
@@ -110,11 +111,14 @@
                         <option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}">
                         </option>
                     </select>
-                    <span class="select1"><svg class="select" xmlns="http://www.w3.org/2000/svg" id="Outline"
-                            viewBox="0 0 24 24" width="512" height="512">
-                            <path
-                                d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z" />
-                        </svg>
+                    <span class="select1">
+                        <label for="pais">
+                            <svg class="select" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+                                width="512" height="512">
+                                <path
+                                    d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z" />
+                            </svg>
+                        </label>
                     </span>
                 </div>
                 <div class="error-div" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
